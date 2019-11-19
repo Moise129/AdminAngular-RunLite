@@ -1,0 +1,189 @@
+<app-nav></app-nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="nav-autobuses-tab" data-toggle="tab" href="#nav-autobuses"
+                        role="tab" aria-controls="nav-autobuses" aria-selected="true">Autobuses</a>
+
+                    <a class="nav-item nav-link " id="nav-viaje-tab" data-toggle="tab" href="#nav-viaje" role="tab"
+                        aria-controls="nav-viaje" aria-selected="true">Viajes</a>
+
+                    <a class="nav-item nav-link active" id="nav-destinos-tab" data-toggle="tab" href="#nav-destinos"
+                        role="tab" aria-controls="nav-destinos" aria-selected="false">Destinos para viajar</a>
+
+                    <a class="nav-item nav-link" id="nav-historial-tab" data-toggle="tab" href="#nav-historial"
+                        role="tab" aria-controls="nav-historial" aria-selected="false">Historial de compras</a>
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade text-center" id="nav-autobuses" role="tabpanel"
+                    aria-labelledby="nav-autobuses-tab"><br>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>nombre</th>
+                                <th>clase</th>
+                                <th>precio base</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let bus of buses">
+                                <td>{{bus.id}}</td>
+                                <td>{{bus.name}}</td>
+                                <td>{{bus.class}}</td>
+                                <td>{{bus.base_price}}</td>
+                                <td>
+                                    
+                                    <button style="background-color:green" *ngIf="bus.status === 'disabled'" 
+                                        (click)="enable_bus(bus)"><i class="material-icons">check</i></button>
+
+                                    <button style="background-color:red" *ngIf="bus.status === 'enabled'" 
+                                        (click)="disable_bus(bus)"><i class="material-icons">stop</i></button>
+
+                                    <button style="background-color:blue" (click)="update_bus(bus)">
+                                        <i class="material-icons">edit</i> 
+                                    </button>
+
+                                    <button style="background-color:orangered" (click)="delete_bus(bus)">
+                                        <i class="material-icons">restore_from_trash</i> 
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button style="background-color:green" (click)="add_bus()"> Añadir
+                        Autobuses</button><br><br><br>
+                </div>
+                <div class="tab-pane fade text-center" id="nav-viaje" role="tabpanel" aria-labelledby="nav-viaje-tab">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha de salida</th>
+                                <th>Hora de salida</th>
+                                <th>Fecha de llegada</th>
+                                <th>Hora de llegada</th>
+                                <th>Lugar de origen</th>
+                                <th>Lugar de destino</th>
+                                <th># Asientos disponibles</th>
+                                <th># Asientos comprados</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let travel of travels">
+                                <td>{{travel.id}}</td>
+                                <td>{{travel.departure_date}}</td>
+                                <td>{{travel.departure_time}}</td>
+                                <td>{{travel.arrival_date}}</td>
+                                <td>{{travel.check_in}}</td>
+                                <td>{{travel.birthplace}}</td>
+                                <td>{{travel.destination_place}}</td>
+                                <td>{{travel.available_seats}}</td>
+                                <td>{{travel.purchased_seats}}</td>
+                                <td>
+                                    <button style="background-color:gray" (click)="showProduct(product)">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </button>
+                                    <button style="background-color:green" (click)="addProduct(product)">
+                                        <i class="material-icons">add_box</i>
+                                    </button>
+                                    <button style="background-color:blue" (click)="subtractProduct(product)">
+                                        <i class="material-icons">shopping_cart</i>
+                                    </button>
+                                    <button style="background-color:red" (click)="removeProduct(product)">
+                                        <i class="material-icons">restore_from_trash</i>
+                                    </button>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button style="background-color:green" (click)="add_travel()"> Añadir Viajes</button><br><br><br>
+                </div>
+                <div class="tab-pane fade show active text-center" id="nav-destinos" role="tabpanel"
+                    aria-labelledby="nav-destinos-tab"><br>
+                    <table class="table table-bordered" cellspacing="0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>km</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let place of places">
+                                <td>{{place.id}}</td>
+                                <td>{{place.name}}</td>
+                                <td>{{place.kilometres}}</td>
+                                <td>
+                                    <button style="background-color:blue" (click)="update_place(place)">
+                                            <i class="material-icons">edit</i> 
+                                        </button>
+                                    <button style="background-color:orangered" (click)="delete_place(place)">
+                                        <i class="material-icons">restore_from_trash</i> 
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button style="background-color:green" (click)="add_place()"> Añadir
+                        Destinos</button><br><br><br>
+                </div>
+                <div class="tab-pane fade text-center" id="nav-historial" role="tabpanel"
+                    aria-labelledby="nav-historial-tab"><br>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th rowspan="2" style="vertical-align: middle">#</th>
+                                <th colspan="4">Viaje</th>
+                                <th colspan="2">Autobus</th>
+                                <th colspan="5">Boleto</th>
+                            </tr>
+                            <tr>
+                                <th>lugar de origen</th>
+                                <th>lugar de destino</th>
+                                <th>fecha y hora de salida</th>
+                                <th>fecha y hora de llegada</th>
+
+                                <th>Nombre</th>
+                                <th>Clase</th>
+
+                                <th>Tipo</th>
+                                <th>numero de asiento</th>
+                                <th>costo</th>
+                                <th>nombre del comprador</th>
+                                <th>metodo de pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let record of records">
+                                <td>{{record.travel.id}}</td>
+                                <td>{{record.travel.birthplace}}</td>
+                                <td>{{record.travel.destination_place}}</td>
+                                <td>{{record.travel.bus.name}}</td>
+                                <td>{{record.travel.bus.class}}</td>
+
+                                <td>{{record.ticket.type}}</td>
+                                <td>{{record.ticket.seating}}</td>
+                                <td>{{record.ticket.cost}}</td>
+                                <td>{{record.ticket.name_of_the_buyer}}</td>
+                                <td>{{record.ticket.payment_method}}</td>
+                            </tr>
+                        </tbody>
+                    </table><br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-footer></app-footer> -->

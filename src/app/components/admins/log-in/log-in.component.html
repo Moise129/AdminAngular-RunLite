@@ -1,0 +1,46 @@
+<div class="container">
+    <br><br><br><br><br><br><br><br>
+    <div class="d-flex justify-content-center">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="https://www.meylab.com.mx/imagen/personalRojo.png" class="brand_logo" alt="Logo">
+                </div><!-- https://image.flaticon.com/icons/svg/295/295128.svg-->
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                <form [formGroup]="loginForm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" name="" class="form-control input_user" formControlName="email" placeholder="Correo lectronico">
+                        <span></span>
+                        <span *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched && loginForm.get('email').hasError('required')">Ingresa un correo valido</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="" class="form-control input_pass" formControlName="password" placeholder="Contraseña ">
+                        <span></span>
+                        <span
+                            *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">Contraseña requerida</span>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="d-flex justify-content-center mt-3 login_container">
+                <button type="button" name="button" class="btn login_btn" (click)="login_wit_email()">Iniciar sesion</button>
+            </div>
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    No tienes cuenta? <a href="register" class="ml-2"><strong>Registrarse</strong></a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href="forgot-password"><strong>Olvidaste tu contraseña?</strong> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
