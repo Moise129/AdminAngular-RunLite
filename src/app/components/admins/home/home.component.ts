@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   //async get_buses(bus: any) {}
-  async add_bus(bus: any) {
+  async add_bus() {
     await Swal.fire({
       title: 'REGISTRAR AUTOBUSES',
       html: 
@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit {
 
 
   //async get_travels(bus: any) {}
-  async add_travel(bus: any) {
+  async add_travel() {
     this.router.navigate(['travel'])
   }
   async disable_travel(bus: any) {}
@@ -229,7 +229,7 @@ export class HomeComponent implements OnInit {
   async delete_travel(bus: any) {}
 
   //async get_destinations(bus: any) {}
-  async add_place(bus: any) {
+  async add_place(){
     await Swal.fire({
       title: 'REGISTRAR LUGAR DE DESTINO',
       html: 

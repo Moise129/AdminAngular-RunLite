@@ -89,16 +89,16 @@
                                 <td>{{travel.available_seats}}</td>
                                 <td>{{travel.purchased_seats}}</td>
                                 <td>
-                                    <button style="background-color:gray" (click)="showProduct(product)">
+                                    <button style="background-color:gray" > <!-- (click)="" -->
                                         <i class="material-icons">remove_red_eye</i>
                                     </button>
-                                    <button style="background-color:green" (click)="addProduct(product)">
+                                    <button style="background-color:green" >
                                         <i class="material-icons">add_box</i>
                                     </button>
-                                    <button style="background-color:blue" (click)="subtractProduct(product)">
+                                    <button style="background-color:blue" >
                                         <i class="material-icons">shopping_cart</i>
                                     </button>
-                                    <button style="background-color:red" (click)="removeProduct(product)">
+                                    <button style="background-color:red" >
                                         <i class="material-icons">restore_from_trash</i>
                                     </button>
                                     
@@ -165,18 +165,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let record of records">
-                                <td>{{record.travel.id}}</td>
-                                <td>{{record.travel.birthplace}}</td>
-                                <td>{{record.travel.destination_place}}</td>
-                                <td>{{record.travel.bus.name}}</td>
-                                <td>{{record.travel.bus.class}}</td>
+                            <tr *ngFor="let sale of sales">
+                                <td>{{sale.travel.id}}</td>
+                                <td>{{sale.travel.birthplace}}</td>
+                                <td>{{sale.travel.destination_place}}</td>
+                                <td>{{sale.travel.bus.name}}</td>
+                                <td>{{sale.travel.bus.class}}</td>
 
-                                <td>{{record.ticket.type}}</td>
-                                <td>{{record.ticket.seating}}</td>
-                                <td>{{record.ticket.cost}}</td>
-                                <td>{{record.ticket.name_of_the_buyer}}</td>
-                                <td>{{record.ticket.payment_method}}</td>
+                                <td>{{sale.ticket.type}}</td>
+                                <td>{{sale.ticket.seating}}</td>
+                                <td>{{sale.ticket.cost}}</td>
+                                <td>{{sale.ticket.name_of_the_buyer}}</td>
+                                <td>{{sale.ticket.payment_method}}</td>
                             </tr>
                         </tbody>
                     </table><br><br><br>

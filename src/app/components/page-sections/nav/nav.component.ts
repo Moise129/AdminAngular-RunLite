@@ -9,7 +9,7 @@ import { AuthFirebaseService } from 'src/app/services/auth-firebase/auth-firebas
 export class NavComponent implements OnInit {
 
   constructor(
-    private authFirebase: AuthFirebaseService
+    public authFirebase: AuthFirebaseService
   ) { }
 
   ngOnInit() {
