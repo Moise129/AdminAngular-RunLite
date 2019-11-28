@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiAdonisjsService {
-  //URL_API = 'https://api-adonis-run-lite.herokuapp.com/api/v1/'
-  URL_API = 'http://127.0.0.1:3333/api/v1/'
+  URL_API = 'https://api-adonis-run-lite.herokuapp.com/api/v1/'
+  //URL_API = 'http://127.0.0.1:3333/api/v1/'
   constructor(
     private http: HttpClient
   ) { }
