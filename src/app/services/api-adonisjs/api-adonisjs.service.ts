@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiAdonisjsService {
+  //URL_API = 'https://api-adonis-run-lite.herokuapp.com/api/v1/'
   URL_API = 'http://127.0.0.1:3333/api/v1/'
   constructor(
     private http: HttpClient
@@ -39,7 +40,7 @@ export class ApiAdonisjsService {
     return this.http.get(`${this.URL_API}travels/show_all`)
   }
   add_travel(bus:any): Observable<any> {
-    return this.http.post(`${this.URL_API}travels/add`,bus)
+    return this.http.post(`${this.URL_API}travels/create`,bus)
   }
   disable_travel(bus:any,id:string): Observable<any> {
     return this.http.put(`${this.URL_API}travels/disable/${id}`,bus)
@@ -50,6 +51,10 @@ export class ApiAdonisjsService {
   delete_travel(id:string): Observable<any> {
     return this.http.delete(`${this.URL_API}travels/delete/${id}`)
   }
+  get_available_seats(id:string): Observable<any> { //id:string
+    return this.http.get(`${this.URL_API}travels/seats/${id}`)//${id}
+  }
+
 
 
   get_places(): Observable<any> {
@@ -63,5 +68,11 @@ export class ApiAdonisjsService {
   }
   delete_place(id:string): Observable<any> {
     return this.http.delete(`${this.URL_API}places/delete/${id}`)
+  }
+
+
+
+  get_hours(): Observable<any> {
+    return this.http.get(`${this.URL_API}hours/show_all`)
   }
 }

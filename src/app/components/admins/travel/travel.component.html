@@ -1,1 +1,89 @@
-<p>travel works!</p>
+<div class="modal-header text-center">
+    <h4 class="modal-title text-center" id="modal-basic-title"><strong>REGISTRAR UN VIAJE</strong></h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="createTravelForm">
+        <div class="form-group">
+            <div class="text-center">
+                <label for="dateOfBirth">Elegir el autobus</label>
+                <select class="selectpicker form-control" id="bus_id" formControlName="bus_id">
+                    <option [value]="bus.id" *ngFor="let bus of buses"> {{bus.name}} ({{bus.class}})</option>
+                </select>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Fecha de salida</label>
+                    <div class="input-group">
+                        <input id="dateOfBirth" class="form-control" formControlName="departure_date" type="date"
+                            placeholder="yyyy-mm-dd" >
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Fecha de llegada</label>
+                    <div class="input-group">
+                        <input id="dateOfBirth" class="form-control" formControlName="arrival_date" type="date"
+                            placeholder="yyyy-mm-dd" >
+                    </div>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <label >Hora de salida</label>
+                    <select class="selectpicker form-control" id="hour_id" formControlName="departure_hour_id">
+                        <option [value]="hour.id" *ngFor="let hour of hours"> {{hour.hour}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Hora de llegada</label>
+                    <select class="selectpicker form-control" id="hour_id" formControlName="arrival_hour_id">
+                        <option [value]="hour.id" *ngFor="let hour of hours"> {{hour.hour}}</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            
+            <div class="text-center custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="switch1" [(ngModel)]="theCheckbox" name="example" (change)="toggleVisibility($event)">
+                <label class="custom-control-label" for="switch1">Viaje de regreso </label>
+            </div>
+    
+            <div *ngIf="!marked" class="row">
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Lugar de origen</label>
+                    <select class="selectpicker form-control" id="place_id" formControlName="origin_place_id">
+                        <option [value]="1"> Tuxtla Gutierrez</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Lugar de destino</label>
+                    <select class="selectpicker form-control" id="place_id" formControlName="place_destination_id">
+                        <option [value]="place.id" *ngFor="let place of places"> {{place.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="marked" class="row">
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Lugar de origen</label>
+                    <select class="selectpicker form-control" id="place_id" formControlName="place_destination_id">
+                        <option [value]="place.id" *ngFor="let place of places"> {{place.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="dateOfBirth">Lugar de destino</label>
+                    <select class="selectpicker form-control" id="place_id" formControlName="origin_place_id">
+                        <option [value]="1"> Tuxtla Gutierrez</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" (click)="add_travel()">Guardar</button>
+        </div>
+
+    </form>
+</div>

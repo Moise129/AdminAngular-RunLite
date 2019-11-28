@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2'
 import { ApiNodejsService } from 'src/app/services/api-nodejs/api-nodejs.service';
-
+import {NgbModal, NgbTooltipModule,NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {TravelComponent} from 'src/app/components/admins/travel/travel.component'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,15 +18,27 @@ export class HomeComponent implements OnInit {
   buses: any
 
   constructor(
+    public activeModal: NgbActiveModal,
     private apiAdonisService: ApiAdonisjsService,
     private apiNodejsService: ApiNodejsService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
     this.apiAdonisService.get_buses().subscribe(data => { this.buses = data.data, console.log(this.buses[0].name) })
-    this.apiAdonisService.get_travels().subscribe(data => { this.travels = data.data })
+    this.apiAdonisService.get_travels().subscribe(data => { 
+      this.travels = data.data 
+      this.travels.forEach(element => {
+        this.apiAdonisService
+        this.apiAdonisService.get_available_seats(element.id).subscribe(data=>{
+          element.available_seats = data.count_available_seats 
+          element.purchased_seats = data.count_occupied_seats
+        })//"holasoyyo" 
+      }); 
+      console.log(this.travels)
+    })
     this.apiAdonisService.get_places().subscribe(data => { this.places = data.data, console.log(this.places), error => console.log(error) })
     this.apiNodejsService.get_sales().subscribe(data => { this.sales = data, console.log(this.sales) })
   }
@@ -39,8 +52,8 @@ export class HomeComponent implements OnInit {
       '<br><label>Clase:</label>'+ //<input id="input2" type="text" placeholder="Clase" class="form-control">
       '<select class="selectpicker form-control" id="input2"> '+
         '<option value="premier" selected>Premier</option>'+
-        '<option value="standar" >Standar</option>'+
-        '<option value="comun" >Comun</option>'+
+        '<option value="lite" >lite</option>'+
+        '<option value="estandar" >estandar</option>'+
       '</select>'+
       '<br><label>Precio base:</label><input id="input3" type="number" placeholder="Precio" class="form-control">',
       focusConfirm: false,
@@ -222,11 +235,48 @@ export class HomeComponent implements OnInit {
 
   //async get_travels(bus: any) {}
   async add_travel() {
-    this.router.navigate(['travel'])
+    //this.router.navigate(['travel'])
+    this.modalService.open(TravelComponent).result.then((result) => {
+        this.apiAdonisService.get_travels().subscribe(data =>{
+          this.travels = data.data
+        })
+    });
+ 
+
   }
   async disable_travel(bus: any) {}
   async update_travel(bus: any) {}
-  async delete_travel(bus: any) {}
+  async delete_travel(travel: any) {
+    Swal.fire({
+      icon: 'info',
+      //title:"Eliminar el autobus "+bus.name.toUpperCase(),
+      text: "¿Esta seguro de eliminar el Viaje?",
+      showConfirmButton: true,
+      showCancelButton: true,
+      preConfirm: () => { 
+        this.apiAdonisService.delete_travel(travel.id).subscribe(data => {
+          Swal.fire({
+            icon: 'success',
+            title:"Buen trabajo",
+            text: "El viaje se ha eliminado correctamente",
+            showConfirmButton: true,
+            preConfirm: () => { 
+              this.apiAdonisService.get_travels().subscribe(data => {
+                this.travels = data.data
+              })
+            }
+          })
+        },error=>{
+          Swal.fire({
+            icon: 'warning',
+            title:"Error!!!",
+            text: "No se ha podido eliminar el viaje",
+            showConfirmButton: true,
+          })
+        })
+      }
+    })
+  }
 
   //async get_destinations(bus: any) {}
   async add_place(){

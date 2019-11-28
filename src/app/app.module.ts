@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TravelComponent } from './components/admins/travel/travel.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [AuthFirebaseService],
+  providers: [
+    AuthFirebaseService
+    ,NgbActiveModal
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

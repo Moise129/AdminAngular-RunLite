@@ -33,6 +33,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="!buses" >
+                                    <td  colspan="5" style="vertical-align: middle" >SIN AUTOBUSES REGISTRADAS</td>
+                                </tr>
                             <tr *ngFor="let bus of buses">
                                 <td>{{bus.id}}</td>
                                 <td>{{bus.name}}</td>
@@ -40,17 +43,16 @@
                                 <td>{{bus.base_price}}</td>
                                 <td>
                                     
-                                    <button style="background-color:green" *ngIf="bus.status === 'disabled'" 
-                                        (click)="enable_bus(bus)"><i class="material-icons">check</i></button>
-
-                                    <button style="background-color:red" *ngIf="bus.status === 'enabled'" 
+                                    <button style="background-color:green" placement="top" ngbTooltip="Habilitar" *ngIf="bus.status === 'disabled'" 
+                                        (click)="enable_bus(bus)" ><i class="material-icons">check</i></button>
+                                    <button style="background-color:red" placement="top" ngbTooltip="Deshabilitar" *ngIf="bus.status === 'enabled'" 
                                         (click)="disable_bus(bus)"><i class="material-icons">stop</i></button>
 
-                                    <button style="background-color:blue" (click)="update_bus(bus)">
+                                    <button style="background-color:blue" placement="top" ngbTooltip="Editar" (click)="update_bus(bus)">
                                         <i class="material-icons">edit</i> 
                                     </button>
 
-                                    <button style="background-color:orangered" (click)="delete_bus(bus)">
+                                    <button style="background-color:orangered" placement="top" ngbTooltip="Eliminar" (click)="delete_bus(bus)">
                                         <i class="material-icons">restore_from_trash</i> 
                                     </button>
                                 </td>
@@ -78,35 +80,35 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="!travels" >
+                                    <td  colspan="4" style="vertical-align: middle" >SIN VIAJES REGISTRADAS</td>
+                            </tr>
                             <tr *ngFor="let travel of travels">
                                 <td>{{travel.id}}</td>
-                                <td>{{travel.departure_date}}</td>
-                                <td>{{travel.departure_time}}</td>
-                                <td>{{travel.arrival_date}}</td>
-                                <td>{{travel.check_in}}</td>
-                                <td>{{travel.birthplace}}</td>
+                                <td>{{travel.departure_date | date : format : timezone}}</td>
+                                <td>{{travel.departure_hour}}</td>
+                                <td>{{ travel.arrival_date | date : format : timezone}}</td> 
+                                <td>{{travel.arrival_hour}}</td>
+                                <td>{{travel.origin_place}}</td>
                                 <td>{{travel.destination_place}}</td>
-                                <td>{{travel.available_seats}}</td>
+                                <td>{{travel.available_seats}}</td> 
                                 <td>{{travel.purchased_seats}}</td>
                                 <td>
-                                    <button style="background-color:gray" > <!-- (click)="" -->
-                                        <i class="material-icons">remove_red_eye</i>
+                                    <button style="background-color:green" placement="top" ngbTooltip="Habilitar" *ngIf="travel.status === 'disabled'" 
+                                        (click)="enable_travel(bus)"><i class="material-icons">check</i></button>
+
+                                    <button style="background-color:red" placement="top" ngbTooltip="Deshabilitar" *ngIf="travel.status === 'enabled'" 
+                                        (click)="disable_travel(bus)"><i class="material-icons">stop</i></button>
+
+                                    <button style="background-color:orangered" placement="top" ngbTooltip="Eliminar" 
+                                        *ngIf="travel.purchased_seats === 0" (click)="delete_travel(travel)">
+                                        <i class="material-icons">restore_from_trash</i> 
                                     </button>
-                                    <button style="background-color:green" >
-                                        <i class="material-icons">add_box</i>
-                                    </button>
-                                    <button style="background-color:blue" >
-                                        <i class="material-icons">shopping_cart</i>
-                                    </button>
-                                    <button style="background-color:red" >
-                                        <i class="material-icons">restore_from_trash</i>
-                                    </button>
-                                    
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <button style="background-color:green" (click)="add_travel()"> Añadir Viajes</button><br><br><br>
+                    <button style="background-color:green" (click)="add_travel(content)"> Añadir Viajes</button><br><br><br>
                 </div>
                 <div class="tab-pane fade show active text-center" id="nav-destinos" role="tabpanel"
                     aria-labelledby="nav-destinos-tab"><br>
@@ -120,15 +122,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="!places" >
+                                <td  colspan="9" style="vertical-align: middle" > NINGUN LUGAR REGISTRADO</td>
+                            </tr>
                             <tr *ngFor="let place of places">
                                 <td>{{place.id}}</td>
                                 <td>{{place.name}}</td>
                                 <td>{{place.kilometres}}</td>
                                 <td>
-                                    <button style="background-color:blue" (click)="update_place(place)">
+                                    <button style="background-color:blue" placement="top" ngbTooltip="Editar" (click)="update_place(place)">
                                             <i class="material-icons">edit</i> 
                                         </button>
-                                    <button style="background-color:orangered" (click)="delete_place(place)">
+                                    <button style="background-color:orangered"  placement="top" ngbTooltip="Eliminar" (click)="delete_place(place)">
                                         <i class="material-icons">restore_from_trash</i> 
                                     </button>
                                 </td>
@@ -163,8 +168,12 @@
                                 <th>nombre del comprador</th>
                                 <th>metodo de pago</th>
                             </tr>
+
                         </thead>
                         <tbody>
+                            <tr *ngIf="!sales" >
+                                <td  colspan="12" style="vertical-align: middle" >SIN VENTAS REGISTRADAS</td>
+                            </tr>
                             <tr *ngFor="let sale of sales">
                                 <td>{{sale.travel.id}}</td>
                                 <td>{{sale.travel.birthplace}}</td>
