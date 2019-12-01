@@ -85,20 +85,20 @@
                             </tr>
                             <tr *ngFor="let travel of travels">
                                 <td>{{travel.id}}</td>
-                                <td>{{travel.departure_date | date : format : timezone}}</td>
+                                <td>{{travel.departure_date | date:'MM/dd/yyyy' }}</td>
                                 <td>{{travel.departure_hour}}</td>
-                                <td>{{ travel.arrival_date | date : format : timezone}}</td> 
+                                <td>{{ travel.arrival_date | date:'MM/dd/yyyy' }}</td> 
                                 <td>{{travel.arrival_hour}}</td>
                                 <td>{{travel.origin_place}}</td>
                                 <td>{{travel.destination_place}}</td>
                                 <td>{{travel.available_seats}}</td> 
                                 <td>{{travel.purchased_seats}}</td>
                                 <td>
-                                    <button style="background-color:green" placement="top" ngbTooltip="Habilitar" *ngIf="travel.status === 'disabled'" 
+                                    <!-- <button style="background-color:green" placement="top" ngbTooltip="Habilitar" *ngIf="travel.status === 'disabled'" 
                                         (click)="enable_travel(bus)"><i class="material-icons">check</i></button>
 
                                     <button style="background-color:red" placement="top" ngbTooltip="Deshabilitar" *ngIf="travel.status === 'enabled'" 
-                                        (click)="disable_travel(bus)"><i class="material-icons">stop</i></button>
+                                        (click)="disable_travel(bus)"><i class="material-icons">stop</i></button> -->
 
                                     <button style="background-color:orangered" placement="top" ngbTooltip="Eliminar" 
                                         *ngIf="travel.purchased_seats === 0" (click)="delete_travel(travel)">
@@ -108,7 +108,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button style="background-color:green" (click)="add_travel(content)"> Añadir Viajes</button><br><br><br>
+                    <button style="background-color:green" (click)="add_travel()"> Añadir Viajes</button><br><br><br>
                 </div>
                 <div class="tab-pane fade show active text-center" id="nav-destinos" role="tabpanel"
                     aria-labelledby="nav-destinos-tab"><br>
