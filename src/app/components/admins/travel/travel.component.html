@@ -54,7 +54,7 @@
                 <div class="col-md-6 text-center">
                     <label for="dateOfBirth">Lugar de origen</label>
                     <select class="selectpicker form-control" id="place_id" formControlName="origin_place_id">
-                        <option [value]="1"> Tuxtla Gutierrez</option>
+                        <option [value]="1" selected disabled> Tuxtla Gutierrez</option>
                     </select>
                 </div>
                 <div class="col-md-6 text-center">
@@ -68,14 +68,14 @@
             <div *ngIf="marked" class="row">
                 <div class="col-md-6 text-center">
                     <label for="dateOfBirth">Lugar de origen</label>
-                    <select class="selectpicker form-control" id="place_id" formControlName="place_destination_id">
+                    <select class="selectpicker form-control" id="place_id" formControlName=" origin_place_id">
                         <option [value]="place.id" *ngFor="let place of places"> {{place.name}}</option>
                     </select>
                 </div>
                 <div class="col-md-6 text-center">
                     <label for="dateOfBirth">Lugar de destino</label>
-                    <select class="selectpicker form-control" id="place_id" formControlName="origin_place_id">
-                        <option [value]="1"> Tuxtla Gutierrez</option>
+                    <select class="selectpicker form-control" id="place_id" formControlName="place_destination_id">
+                        <option [value]="1" selected> Tuxtla Gutierrez</option>
                     </select>
                 </div>
             </div>

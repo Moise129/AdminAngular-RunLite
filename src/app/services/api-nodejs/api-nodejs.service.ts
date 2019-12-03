@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiNodejsService {
-  URL_API = 'https://backend-tiendaenlinea-tics.herokuapp.com/api/v1/'
+  URL_API = 'https://api-node-travels.herokuapp.com/api/'
   constructor(
     private http: HttpClient
   ) { }
 
   get_sales(): Observable<any> {
-    return this.http.get(`${this.URL_API}sales/show_all`)
+    return this.http.get(`${this.URL_API}sales`)
   }
 }

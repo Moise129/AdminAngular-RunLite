@@ -31,13 +31,12 @@ export class HomeComponent implements OnInit {
     this.apiAdonisService.get_travels().subscribe(data => { 
       this.travels = data.data 
       this.travels.forEach(element => {
-        this.apiAdonisService
         this.apiAdonisService.get_available_seats(element.id).subscribe(data=>{
           element.available_seats = data.count_available_seats 
           element.purchased_seats = data.count_occupied_seats
         })//"holasoyyo" 
       }); 
-      console.log(this.travels)
+      console.log("Viajes ",this.travels)
     })
     this.apiAdonisService.get_places().subscribe(data => { this.places = data.data, console.log(this.places), error => console.log(error) })
     this.apiNodejsService.get_sales().subscribe(data => { this.sales = data, console.log(this.sales) })
@@ -48,7 +47,7 @@ export class HomeComponent implements OnInit {
     await Swal.fire({
       title: 'REGISTRAR AUTOBUSES',
       html: 
-      '<br><label>Nombre:</label><input id="input1" type="text" placeholder="Nombre" class="form-control">'+
+      '<br><label>Nombre:</label><input id="input1" type="text" placeholder="Nombre" class="form-control" required>'+
       '<br><label>Clase:</label>'+ //<input id="input2" type="text" placeholder="Clase" class="form-control">
       '<select class="selectpicker form-control" id="input2"> '+
         '<option value="premier" selected>Premier</option>'+

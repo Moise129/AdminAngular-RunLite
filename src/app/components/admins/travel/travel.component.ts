@@ -42,6 +42,8 @@ export class TravelComponent implements OnInit {
 
   toggleVisibility(e){
     this.marked= e.target.checked;
+    this.createTravelForm.value.origin_place_id = 2 
+    this.createTravelForm.value.place_destination_id = 1
   }
   
   async add_travel(){
