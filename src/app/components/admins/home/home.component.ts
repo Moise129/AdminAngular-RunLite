@@ -238,6 +238,12 @@ export class HomeComponent implements OnInit {
     this.modalService.open(TravelComponent).result.then((result) => {
         this.apiAdonisService.get_travels().subscribe(data =>{
           this.travels = data.data
+          this.travels.forEach(element => {
+            this.apiAdonisService.get_available_seats(element.id).subscribe(data=>{
+              element.available_seats = data.count_available_seats 
+              element.purchased_seats = data.count_occupied_seats
+            })//"holasoyyo" 
+          }); 
         })
     });
  
@@ -262,6 +268,12 @@ export class HomeComponent implements OnInit {
             preConfirm: () => { 
               this.apiAdonisService.get_travels().subscribe(data => {
                 this.travels = data.data
+                this.travels.forEach(element => {
+                  this.apiAdonisService.get_available_seats(element.id).subscribe(data=>{
+                    element.available_seats = data.count_available_seats 
+                    element.purchased_seats = data.count_occupied_seats
+                  })//"holasoyyo" 
+                }); 
               })
             }
           })

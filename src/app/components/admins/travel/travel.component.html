@@ -68,7 +68,7 @@
             <div *ngIf="marked" class="row">
                 <div class="col-md-6 text-center">
                     <label for="dateOfBirth">Lugar de origen</label>
-                    <select class="selectpicker form-control" id="place_id" formControlName=" origin_place_id">
+                    <select class="selectpicker form-control" id="place_id" formControlName="origin_place_id">
                         <option [value]="place.id" *ngFor="let place of places"> {{place.name}}</option>
                     </select>
                 </div>
