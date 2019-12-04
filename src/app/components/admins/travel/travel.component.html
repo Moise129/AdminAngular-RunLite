@@ -22,29 +22,13 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
-                    <label for="dateOfBirth">Fecha de llegada</label>
-                    <div class="input-group">
-                        <input id="dateOfBirth" class="form-control" formControlName="arrival_date" type="date"
-                            placeholder="yyyy-mm-dd" >
+                        <label >Hora de salida</label>
+                        <select class="selectpicker form-control" id="hour_id" formControlName="departure_hour_id">
+                            <option [value]="hour.id" *ngFor="let hour of hours"> {{hour.hour}}</option>
+                        </select>
                     </div>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    <label >Hora de salida</label>
-                    <select class="selectpicker form-control" id="hour_id" formControlName="departure_hour_id">
-                        <option [value]="hour.id" *ngFor="let hour of hours"> {{hour.hour}}</option>
-                    </select>
-                </div>
-                <div class="col-md-6 text-center">
-                    <label for="dateOfBirth">Hora de llegada</label>
-                    <select class="selectpicker form-control" id="hour_id" formControlName="arrival_hour_id">
-                        <option [value]="hour.id" *ngFor="let hour of hours"> {{hour.hour}}</option>
-                    </select>
-                </div>
             </div>
-            <hr>
-            
+            <hr class="row">
             <div class="text-center custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="switch1" [(ngModel)]="theCheckbox" name="example" (change)="toggleVisibility($event)">
                 <label class="custom-control-label" for="switch1">Viaje de regreso </label>

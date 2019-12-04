@@ -70,10 +70,9 @@
                                 <th>#</th>
                                 <th>Fecha de salida</th>
                                 <th>Hora de salida</th>
-                                <th>Fecha de llegada</th>
-                                <th>Hora de llegada</th>
                                 <th>Lugar de origen</th>
                                 <th>Lugar de destino</th>
+                                <th>Autobus y clase</th>
                                 <th># Asientos disponibles</th>
                                 <th># Asientos comprados</th>
                                 <th></th>
@@ -81,16 +80,15 @@
                         </thead>
                         <tbody>
                             <tr *ngIf="!travels" >
-                                    <td  colspan="9" style="vertical-align: middle" >SIN VIAJES REGISTRADAS</td>
+                                <td  colspan="9" style="vertical-align: middle" >SIN VIAJES REGISTRADAS</td>
                             </tr>
                             <tr *ngFor="let travel of travels">
                                 <td>{{travel.id}}</td>
                                 <td>{{travel.departure_date.split('T')[0] | date:'dd/MM/yyyy'}}</td> 
                                 <td>{{travel.departure_hour}}</td>
-                                <td>{{travel.arrival_date.split('T')[0] | date:'dd/MM/yyyy'}}</td> 
-                                <td>{{travel.arrival_hour}}</td>
                                 <td>{{travel.origin_place}}</td>
                                 <td>{{travel.destination_place}}</td>
+                                <td>{{travel.bus.name}} ({{travel.bus.class}})</td>
                                 <td>{{travel.available_seats}}</td> 
                                 <td>{{travel.purchased_seats}}</td>
                                 <td>
@@ -149,7 +147,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th rowspan="2" style="vertical-align: middle">#</th>
-                                <th colspan="4">Viaje</th>
+                                <th colspan="3">Viaje</th>
                                 <th colspan="2">Autobus</th>
                                 <th colspan="5">Boleto</th>
                                 <th colspan="1"></th>
@@ -158,8 +156,6 @@
                                 <th style="vertical-align: middle">lugar de origen</th>
                                 <th style="vertical-align: middle">lugar de destino</th>
                                 <th style="vertical-align: middle">fecha y hora de salida</th>
-                                <th>fecha y hora de llegada</th>
-
                                 <th style="vertical-align: middle">Nombre</th>
                                 <th style="vertical-align: middle">Clase</th>
 
@@ -179,9 +175,7 @@
                             <tr *ngFor="let sale of sales">
                                 <td>{{sale.travel_id}}</td>
                                 <td>{{sale.origin_place_id}}</td>
-                                <td>{{sale.place_destination_id}}</td>
-                                <td>{{sale.departure_hour_id}}</td>
-                                <td>{{sale.arrival_hour_id}}</td>
+                                <td>{{sale.place_destination_id}} a las {{sale.departure_hour_id}} </td>
                                 <td>{{sale.name}}</td>
                                 <td>{{sale.class}}</td>
                                 <td>{{sale.type}}</td>
