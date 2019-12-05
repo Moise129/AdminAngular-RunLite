@@ -235,7 +235,9 @@ export class HomeComponent implements OnInit {
   //async get_travels(bus: any) {}
   async add_travel() {
     //this.router.navigate(['travel'])
+  
     this.modalService.open(TravelComponent).result.then((result) => {
+
         this.apiAdonisService.get_travels().subscribe(data =>{
           this.travels = data.data
           this.travels.forEach(element => {
