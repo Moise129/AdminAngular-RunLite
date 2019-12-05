@@ -23,14 +23,18 @@ export class TravelComponent implements OnInit {
     private apiAdonisService: ApiAdonisjsService,
     private formBuilder:FormBuilder,
     public activeModal: NgbActiveModal
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit() {
-    this.apiAdonisService.get_buses().subscribe(data => { this.buses = data.data, console.log(this.buses[0].name) })
+    this.apiAdonisService.get_buses().subscribe(data => { 
+      this.buses = data.data, console.log(this.buses[0].name) 
+    })
     this.apiAdonisService.get_hours().subscribe(data => { this.hours = data.data, console.log(data) })
     this.apiAdonisService.get_places().subscribe(data => { this.places = data.data, console.log(data) })
     this.createTravelForm = this.formBuilder.group({
-      bus_id: ['1'],
+      bus_id: [this.buses[0].id],
       departure_date: [''],
       arrival_date: [''],
       departure_hour_id: ['1'],
