@@ -17,6 +17,7 @@ export class TravelComponent implements OnInit {
 
   marked = false;
   theCheckbox = false;
+  static MESSAGE_DATA: string;
 
   constructor(
     private modalService: NgbModal,
@@ -34,11 +35,9 @@ export class TravelComponent implements OnInit {
     this.apiAdonisService.get_hours().subscribe(data => { this.hours = data.data, console.log(data) })
     this.apiAdonisService.get_places().subscribe(data => { this.places = data.data, console.log(data) })
     this.createTravelForm = this.formBuilder.group({
-      bus_id: [this.buses[0].id],
+      bus_id: ['1'],
       departure_date: [''],
-      arrival_date: [''],
       departure_hour_id: ['1'],
-      arrival_hour_id: ['2'],
       origin_place_id: ['1'],
       place_destination_id: ['2']
     })
