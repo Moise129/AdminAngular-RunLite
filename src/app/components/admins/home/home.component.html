@@ -152,6 +152,7 @@
                                 <th colspan="5">Boleto</th>
                                 <th colspan="1"></th>
                             </tr>
+
                             <tr >
                                 <th style="vertical-align: middle">lugar de origen</th>
                                 <th style="vertical-align: middle">lugar de destino</th>
@@ -173,9 +174,13 @@
                                 <td  colspan="12" style="vertical-align: middle" >SIN VENTAS REGISTRADAS</td>
                             </tr>
                             <tr *ngFor="let sale of sales">
+
                                 <td>{{sale.travel_id}}</td>
-                                <td>{{sale.origin_place_id}}</td>
-                                <td>{{sale.place_destination_id}} a las {{sale.departure_hour_id}} </td>
+                                <td>{{sale.origin_place_name}}</td>
+                                <td>{{sale.destination_place_name}}</td>
+                                
+                                <td>{{sale.departure_date.split('T')[0] | date:'dd/MM/yyyy'}} a las {{sale.hour_name}} </td>
+                                
                                 <td>{{sale.name}}</td>
                                 <td>{{sale.class}}</td>
                                 <td>{{sale.type}}</td>

@@ -1,3 +1,13 @@
 docker build --tag moi123456/admin_run_lite:v1.0 .
 docker run --name admin_run_lite -p 8002:8002 moi123456/admin_run_lite:v1.0
 docker run -p 8002:8002 moi123456/admin_run_lite:v1.0
+
+
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "lite": "lite-server"
+    "postinstall": "ng build --prod"
